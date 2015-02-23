@@ -21,8 +21,8 @@ import dk.server.services.Ranking;
 
 public class MainServer extends Verticle {
 
-	final int PORT = 983;
-	final String IP = "172.27.231.94";
+	final int PORT = 990;
+	final String IP = "14.49.38.96";
 	final String DB = "database.my";
 	private EventBus eventBus ;
 	
@@ -189,6 +189,7 @@ public class MainServer extends Verticle {
 						// TODO Auto-generated method stub
 
 						System.out.println("server waiting . . . " + result.succeeded());
+						System.out.println("? : " + result.toString());
 					}
 		});
 	}// end start
