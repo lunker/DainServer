@@ -22,7 +22,7 @@ import dk.server.services.Ranking;
 public class MainServer extends Verticle {
 
 	final int PORT = 983;
-	final String IP = "14.49.38.96";
+	final String IP = "172.27.231.94";
 	final String DB = "database.my";
 	private EventBus eventBus ;
 	
