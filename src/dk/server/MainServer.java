@@ -190,6 +190,14 @@ public class MainServer extends Verticle {
 									/*
 									 * add my facebook friend list 
 									 */
+
+									if(connector.addUser(user, "user")){
+										System.out.println("[USER] signup complete");
+									}
+									else
+										System.out.println("[USER] signup fail");
+									request.response().setChunked(true);
+									request.response().write(user.getString("id"));
 									
 								}
 								else{
@@ -202,17 +210,21 @@ public class MainServer extends Verticle {
 									user.putString("password", password);
 									user.putString("gender", gender);
 									user.putString("age", age);
+									
+									if(connector.addUser(user, "user")){
+										System.out.println("[USER] signup complete");
+									}
+									else
+										System.out.println("[USER] signup fail");
+									request.response().setChunked(true);
+									request.response().write(user.getString("id"));
+									
 								}
 								
 								
-								if(connector.addUser(user, "user")){
-									System.out.println("[USER] signup complete");
-								}
-								else
-									System.out.println("[USER] signup fail");
 								
-								request.response().setChunked(true);
-								request.response().write(user.getString("id"));
+								
+							
 							}// end else if 
 							
 						}
