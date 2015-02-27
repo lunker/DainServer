@@ -25,7 +25,8 @@ import dk.server.services.Ranking;
 public class MainServer extends Verticle {
 
 	final int PORT = 10000;
-	final String IP = "172.27.231.94";
+//	final String IP = "172.27.231.94";
+	final String IP="192.168.0.127";
 	final String DB = "database.my";
 	private EventBus eventBus ;
 	
@@ -204,7 +205,7 @@ public class MainServer extends Verticle {
 									// dain signup
 									
 									String id = "d"+ (connector.getMyCollection("user").count()+1) ;
-								
+									System.out.println("id : " + id );
 									user.putString("id", id);
 									user.putString("email", email);
 									user.putString("password", password);

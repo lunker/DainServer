@@ -25,8 +25,6 @@ public class DatabaseConnector {
 	public volatile MongoClient mongoClient = null;
 	private MongoDatabase database = null;
 	
-	
-
 	public MongoDatabase getDatabase() {
 		return database;
 	}
@@ -69,6 +67,7 @@ public class DatabaseConnector {
 	
 	/*
 	 * success!!!!!
+	 * test success!!!!
 	 */
 	public boolean addUser(JsonObject user, String collectionName){	
 		
@@ -88,23 +87,11 @@ public class DatabaseConnector {
 		}
 		*/
 		
-		/*
-		 * 
-									user.putString("id", id);
-									user.putString("email", email);
-									user.putString("password", password);
-									user.putString("gender", gender);
-									user.putString("age", age);
-		 */
-		
 		database.createCollection(user.getString("id"));
 		getMyCollection(user.getString("id")).insertOne(new Document("email", user.getString("email")).
 				append("password", user.getString("password")).append("gender", user.getString("gender")).append("age", user.getString("age")));
 		
-//		database.createCollection("r"+user.getString("id"));
-//		database.createCollection("g"+user.getString("id"));
-		
-		
+		getMyCollection("user").insertOne(new Document("id", user.getString("id")));
 		
 		return true;
 		
@@ -119,7 +106,6 @@ public class DatabaseConnector {
 	 * 
 	 * 완벽하진않
 	 */
-	
 	
 	public Document getUser(String userId){
 		
@@ -143,7 +129,6 @@ public class DatabaseConnector {
 		
 		return true;
 	}
-	
 	
 	/*
 	 * success!!!
@@ -257,7 +242,6 @@ public class DatabaseConnector {
 		
 		return result/count ;
 	}
-	
 	
 	/*
 	public String getReviewCollectionName(String brand, String coffeeName){
