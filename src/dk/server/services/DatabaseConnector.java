@@ -164,15 +164,10 @@ public class DatabaseConnector {
 	 * 
 	 */
 	
-	public boolean addGrade(String brand, String coffeeName, String grade){
+	public synchronized boolean addGrade(String brand, String userId, String coffeeId, String grade){
 		
 		
-		
-		//
-		
-		
-		
-		
+		String gradeCollection = "g_"+ coffeeId ; 
 		Document gradeField = new Document();
 		Document countField = new Document();
 		
@@ -180,12 +175,49 @@ public class DatabaseConnector {
 		gradeField.put("totalgrade", Double.parseDouble(grade));
 		System.out.println("grade ? : "+ Double.parseDouble(grade));
 		
+		/*
+		 * update 
+		 */
+		
+		/*
 		if( (getMyCollection(brand).findOneAndUpdate(new Document("name", coffeeName), 
 										new Document("$inc", gradeField) )!= null  && 
 										(getMyCollection(brand).findOneAndUpdate(new Document("name", coffeeName), new Document("$inc", countField)))!= null  )){
 			return true;
 		}
 		return false;
+		*/
+		
+		
+		/*
+		 * add grade history to user collection
+		 */
+		 
+		if(getMyCollection(userId).find(new Document("coffeeid", coffeeId))!= null ){
+			// UPDATE THE COFFEE GRADE
+			getMyCollection(userId).updateOne(new Document("coffeeid", coffeeId), new Document("grade", grade));
+			getMyCollection(gradeCollection).updateOne(new Document("userid", userId), new Document("grade", grade));
+			return true;
+			
+		}
+		else{
+			// ADD THE GRADE TO NEW ITEM
+			getMyCollection(userId).insertOne(new Document("coffeeid", coffeeId).append("grade", grade));
+			getMyCollection(gradeCollection).insertOne(new Document("userid", userId).append("grade", grade));
+			return true;
+		}
+		
+		/*
+		 * update the grade to coffee collection.
+		 */
+		
+		
+		
+		
+		
+		return false;
+		
+		
 		
 	}
 	

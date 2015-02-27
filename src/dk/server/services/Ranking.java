@@ -1,10 +1,16 @@
 package dk.server.services;
 
+import java.util.ArrayList;
+
 public class Ranking {
 
 	
+	private ArrayList<String> totalRanking = null;
+	private ArrayList<String> americanoRanking = null;
+//	private ArrayList<String> 
 	
-	public void ordering(){
+	
+	public void updateRanking(){
 		
 	}
 	

@@ -5,10 +5,17 @@ brand = collecition name
 coffe name = in collection row 
 
 
++
+
+유저 1명당 1개의 collection을 만들어야함.
+
+
+
+후기 => 각 음료마다 후기 collection을 만든다. ????
+
+
 
 ------------------------------------------------------
-
-
 
 
 1. User
@@ -22,20 +29,20 @@ coffe name = in collection row
  - reviews : array
  - graded items : array
  
+ + 유저 테이블의 첫번째에는 회원정보, 
+ + 투번째에는 유저가 
  
- 
-2. Coffee
+2. Product
  -> 브랜드 별로 collection을 만듬.
 
  - productId(key)
- - brand
- - type
+ - brand 
+ - type ( 예 - coffee, desert, 등등등 
  - name
  - price
  - total count (int)
  - total grade ( double) 
  - avg grade
-
 
 
 3. review
@@ -51,9 +58,8 @@ coffe name = in collection row
 
 4. grade
 
-
  - productId
- - userId
+ - userId	
  - grade
  - date
  
@@ -70,10 +76,21 @@ coffe name = in collection row
 * encoding
 
  - coffee brand 
- 	- 1000 : startbucks
- 	- 2000 : cafebene
+ 	- 1000 : cafebene
+ 	- 2000 : startbucks
  	- 3000 : angelinus
  	- 4000 : ediya
+ 	
+ 	
+ 	1000: cafebene_americano
+ 	1001: cafebene_capucino
+ 	1002: cafebene_cafelatte
+ 	1003: cafebene_cafemoca
+ 	1004: cafebene_machiato
+ 	1005: cafebene_esspresso
+ 	1006: cafebene_whitemoca
+ 	1007: cafebene_creamlatte
+ 	
  	
  - id 
  	- auto increment
@@ -81,5 +98,5 @@ coffe name = in collection row
  - category
  	- 0 : coffee
  	- 1 : non-coffee(beverage)
- 	- 2 : dessert
+ 	- 2 : desserts
  	- 3 : 

@@ -16,6 +16,9 @@ import org.vertx.java.core.net.NetSocket;
 import org.vertx.java.core.streams.Pump;
 import org.vertx.java.platform.Verticle;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+
 import dk.server.services.DatabaseConnector;
 import dk.server.services.Ranking;
 
@@ -33,8 +36,6 @@ public class MainServer extends Verticle {
 		// TODO Auto-generated method stub
 		connector = new DatabaseConnector();
 		connector.connect();
-		
-		
 		
 		eventBus = vertx.eventBus();
 		HttpServer server = vertx.createHttpServer();
@@ -55,18 +56,39 @@ public class MainServer extends Verticle {
 					// get the ranking
 					if(action.equals("ranking")){
 						System.out.println("[GET] get the ranking request");
-					
+
+						
+						MultiMap requestMap = request.formAttributes();
+						String email = requestMap.get("email");
+						String password = requestMap.get("password");
+						String gender = requestMap.get("gender");
+						String age = requestMap.get("age");
+						String name = requestMap.get("coffeename");
+						String brand = requestMap.get("brand");
+						
+//						connector.getMyCollection(brand).agg;
+						
+//						DBObject match = new BasicDBObject("$match", value);
 						
 						
-						
-					
 					}// end ranking
 				}
+				
 				else if(action.equals("review")){
+					/*
+					 * GET REVIEW
+					 */
 					System.out.println("[GET] get the review request");
 				}
+				else if(action.equals("grade")){
+					/*
+					 * GET GRADE
+					 */
+					
+					
+				}
 				
-				//POST
+				// HTTP POST
 				else{
 					request.endHandler(new Handler<Void>() {
 						
@@ -75,6 +97,8 @@ public class MainServer extends Verticle {
 							// TODO Auto-generated method stub
 							System.out.println("[POST] add grade");
 							// post the grade 
+							
+							
 							if(action.equals("grade")){
 								
 								System.out.println("[POST] add grade");
@@ -115,9 +139,6 @@ public class MainServer extends Verticle {
 								else
 									System.out.println("[POST GRADE] FAIL" );
 								
-								
-								
-								
 							}//END IF
 							/*
 							 * not yet
@@ -151,16 +172,42 @@ public class MainServer extends Verticle {
 								System.out.println("[POST] signup");
 								
 								MultiMap requestMap = request.formAttributes();
+								String type = requestMap.get("type");
 								String email = requestMap.get("email");
 								String password = requestMap.get("password");
 								String gender = requestMap.get("gender");
 								String age = requestMap.get("age");
-								
-								JsonObject user = new JsonObject();
-								user.putString("email", email);
-								user.putString("password", password);
-								user.putString("gender", gender);
-								user.putString("age", age);
+								 
+								if(type.equals("f")){
+									//facebook signup
+									
+									//facebook id 
+									String id = requestMap.get("id");
+									
+									user.putString("id", id);
+									user.putString("email", email);
+									user.putString("password", password);
+									user.putString("gender", gender);
+									user.putString("age", age);
+									
+									
+									/*
+									 * add my facebook friend list 
+									 */
+									
+								}
+								else{
+									// dain signup
+									
+									String id = "d"+ (connector.getMyCollection("user").count()+1) ;
+									
+									JsonObject user = new JsonObject();
+									user.putString("id", id);
+									user.putString("email", email);
+									user.putString("password", password);
+									user.putString("gender", gender);
+									user.putString("age", age);
+								}
 								
 								
 								if(connector.addUser(user, "user")){
