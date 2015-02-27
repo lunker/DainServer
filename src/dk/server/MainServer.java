@@ -66,10 +66,7 @@ public class MainServer extends Verticle {
 						String name = requestMap.get("coffeename");
 						String brand = requestMap.get("brand");
 						
-//						connector.getMyCollection(brand).agg;
-						
 //						DBObject match = new BasicDBObject("$match", value);
-						
 						
 					}// end ranking
 				}
@@ -84,7 +81,6 @@ public class MainServer extends Verticle {
 					/*
 					 * GET GRADE
 					 */
-					
 					
 				}
 				
@@ -112,9 +108,10 @@ public class MainServer extends Verticle {
 //								double grade = Double.parseDouble(request.formAttributes().get("grade"));
 								
 								
-								String brand = requestMap.get("brand");
+//								String brand = requestMap.get("brand");
 								String grade = requestMap.get("grade");
 								String coffeeName = requestMap.get("coffeename");
+								String userId = requestMap.get("userid");
 								/*
 								try {
 									coffeeName = new String(requestMap.get("coffeename").getBytes(), "UTF-16");
@@ -132,9 +129,9 @@ public class MainServer extends Verticle {
 									e.printStackTrace();
 								}
 								*/
-								System.out.println("[POST GRADE] get brand , coffeename, grade : " + brand + "," + coffeeName + "," + grade);
+								System.out.println("[POST GRADE] get user id , coffeename, grade : " + userId + "," + coffeeName + "," + grade);
 								
-								if(connector.addGrade(brand, coffeeName, grade))
+								if(connector.addGrade(userId, coffeeName, grade))
 									System.out.println("[POST GRADE] SUCCESS");
 								else
 									System.out.println("[POST GRADE] FAIL" );
@@ -170,7 +167,7 @@ public class MainServer extends Verticle {
  
 								 */
 								System.out.println("[POST] signup");
-								
+								JsonObject user = new JsonObject();
 								MultiMap requestMap = request.formAttributes();
 								String type = requestMap.get("type");
 								String email = requestMap.get("email");
@@ -190,7 +187,6 @@ public class MainServer extends Verticle {
 									user.putString("gender", gender);
 									user.putString("age", age);
 									
-									
 									/*
 									 * add my facebook friend list 
 									 */
@@ -200,8 +196,7 @@ public class MainServer extends Verticle {
 									// dain signup
 									
 									String id = "d"+ (connector.getMyCollection("user").count()+1) ;
-									
-									JsonObject user = new JsonObject();
+								
 									user.putString("id", id);
 									user.putString("email", email);
 									user.putString("password", password);
@@ -211,13 +206,13 @@ public class MainServer extends Verticle {
 								
 								
 								if(connector.addUser(user, "user")){
-									System.out.println("signup complete");
+									System.out.println("[USER] signup complete");
 								}
 								else
-									System.out.println("signup fail");
+									System.out.println("[USER] signup fail");
 								
 								request.response().setChunked(true);
-								request.response().write("ack");
+								request.response().write(user.getString("id"));
 							}// end else if 
 							
 						}

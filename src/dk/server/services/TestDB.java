@@ -41,7 +41,7 @@ public class TestDB {
 		FindIterable<Document> result = connector.getMyCollection("user").find(new Document("graded",""));
 		connector.getMyCollection("user").
 		
-		System.out.println(result.first().toString());
+//		System.out.println(result.first().toString());
 		
 	}
 
