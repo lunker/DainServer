@@ -213,6 +213,15 @@ public class DatabaseConnector {
 			// UPDATE THE COFFEE GRADE
 			getMyCollection(userId).updateOne(new Document("coffeeid", coffeeId), new Document("grade", grade));
 			getMyCollection(gradeCollection).updateOne(new Document("userid", userId), new Document("grade", grade));
+			
+			
+			getMyCollection()
+			/*
+			 * 평점을 각 브랜드의 row에 넣어야하나? 
+			 * 
+			 */
+			
+			
 			return true;
 			
 		}
@@ -252,6 +261,17 @@ public class DatabaseConnector {
 	
 	
 	
+	public String getBrandFromID(String id ){
+		
+		
+		
+		int id = Integer.parseInt(id);
+		
+		
+		if()
+		
+		
+	}
 	
 	
 	

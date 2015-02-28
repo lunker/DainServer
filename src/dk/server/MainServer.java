@@ -61,13 +61,10 @@ public class MainServer extends Verticle {
 						
 						MultiMap requestMap = request.formAttributes();
 						String email = requestMap.get("email");
-						String password = requestMap.get("password");
-						String gender = requestMap.get("gender");
-						String age = requestMap.get("age");
-						String name = requestMap.get("coffeename");
-						String brand = requestMap.get("brand");
 						
-//						DBObject match = new BasicDBObject("$match", value);
+						
+						
+						
 						
 					}// end ranking
 				}
@@ -113,23 +110,8 @@ public class MainServer extends Verticle {
 								String grade = requestMap.get("grade");
 								String coffeeName = requestMap.get("coffeename");
 								String userId = requestMap.get("userid");
-								/*
-								try {
-									coffeeName = new String(requestMap.get("coffeename").getBytes(), "UTF-16");
-									
-									System.out.println("[POST GRADE] get brand , coffeename, grade : " + brand + "," + coffeeName + "," + grade);
-									
-									if(connector.addGrade(brand, coffeeName, grade))
-										System.out.println("[POST GRADE] SUCCESS");
-									else
-										System.out.println("[POST GRADE] FAIL" );
-									
-									
-								} catch (UnsupportedEncodingException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								*/
+							
+								
 								System.out.println("[POST GRADE] get user id , coffeename, grade : " + userId + "," + coffeeName + "," + grade);
 								
 								if(connector.addGrade(userId, coffeeName, grade))
